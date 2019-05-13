@@ -71,18 +71,9 @@
     <div class="header-top-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="col-xs-12 text-center">
                     <div class="logo-area">
                         <a href="index.html"><img src="img/logo/logo.png" alt="logo"/></a>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                    <div class="header-top-menu">
-                        <ul class="nav navbar-nav notika-top-nav">
-                            <li class="nav-item">
-                              <a href="zupport/help.html" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-support"></i></span></a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -172,6 +163,13 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li><a data-toggle="collapse" data-target="#profile">Profile</a>
+                                    <ul id="demoevent" class="collapse dropdown-header-top">
+                                        <li><a href="zupport/profile.html">My profile</a></li>
+                                        <li><a href="zupport/help.html">Help</a></li>
+                                        <li><a id="logout" href="">Logout</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -198,7 +196,9 @@
                         </li>
                         <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> App views</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a>
+                        <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-plus-symbol"></i> Pages</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#profile"><i class="notika-icon notika-support"></i> Profile</a>
                         </li>
                     </ul>
                     <div class="tab-content custom-menu-content">
@@ -291,6 +291,16 @@
                                 <li><a href="color.html">Color</a>
                                 </li>
                                 <li><a href="404.html">404 Page</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="profile" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="zupport/profile.html">My profile</a>
+                                </li>
+                                <li><a href="zupport/help.html">Help</a>
+                                </li>
+                                <li><a id="logout" href="">Logout</a>
                                 </li>
                             </ul>
                         </div>
