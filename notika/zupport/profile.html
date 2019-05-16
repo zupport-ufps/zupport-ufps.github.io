@@ -67,7 +67,7 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <div class="logo-area">
-                        <a href="index.html"><img src="../img/logo/logo.png" alt="logo"/></a>
+                        <a href="../index.html"><img src="../img/logo/logo.png" alt="logo"/></a>
                     </div>
                 </div>
             </div>
@@ -339,7 +339,7 @@
                       <div class="invoice-img">
 
                       </div>
-                      <div class="invoice-hds-pro">
+                      <div id="app" class="invoice-hds-pro">
                         <table class="table table-hover">
                           <tbody>
                             <tr>
@@ -360,6 +360,8 @@
                             </tr>
                           </tbody>
                         </table>
+
+                        {{ info }}
                       </div>
                   </div>
               </div>
@@ -448,6 +450,37 @@
 	<!-- tawk chat JS
 		============================================ -->
     <script src="../js/tawk-chat.js"></script>
+
+    <!-- Vue.js
+    ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+      new Vue({
+        el: '#app',
+        data () {
+          return {
+            info: null
+          }
+        },
+        mounted () {
+          localStorage.setItem("token", "64a49b9f95c2aaeafe76b77df235f6c56685d1c5")
+          var config = {
+            headers: {
+              'Access-Control-Allow-Origin':'*',
+              'Access-Control-Allow-Methods': 'GET',
+              'cache-control': 'no-cache',
+              'Authorization': "Token "+localStorage.getItem('token')
+            }
+          }
+
+          axios
+          .get('http://localhost:8000/perfil/')
+          .then(response => (this.info = response))
+        }
+      })
+    </script>
 </body>
 
 </html>
