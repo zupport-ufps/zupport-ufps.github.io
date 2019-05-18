@@ -344,24 +344,24 @@
                           <tbody>
                             <tr>
                               <td class="text-right"><strong>Nombre</strong></td>
-                              <td>Emanuel Martínez</td>
+                              <td>{{ info.data[0].nombre }} {{ info.data[0].apellido }}</td>
                             </tr>
                             <tr>
                               <td class="text-right"><strong>Correo electrónico</strong></td>
-                              <td>emartinezpinzon@gmail.com</td>
+                              <td>{{ info.data[0].usuario.username }}</td>
                             </tr>
                             <tr>
                               <td class="text-right"><strong>Rol</strong></td>
-                              <td>Cliente</td>
+                              <td v-if="info.data[0].rol == '0'">Cliente</td>
+                              <td v-if="info.data[0].rol == '1'">Asistente</td>
+                              <td v-if="info.data[0].rol == '2'">Administrador</td>
                             </tr>
                             <tr>
                               <td class="text-right"><strong>Con nosotros desde</strong></td>
-                              <td>30 de febrero de 2019</td>
+                              <td>{{ info.data[0].timestamp | moment}}</td>
                             </tr>
                           </tbody>
                         </table>
-
-                        {{ info }}
                       </div>
                   </div>
               </div>
@@ -469,22 +469,24 @@
           }
         },
         mounted () {
-          localStorage.setItem("token", "64a49b9f95c2aaeafe76b77df235f6c56685d1c5")
-          var config = {
-            headers: {
-              'Access-Control-Allow-Origin':'*',
-              'Access-Control-Allow-Methods': 'GET',
-              'cache-control': 'no-cache',
-              'Authorization': "Token "+localStorage.getItem('token')
-            }
-          }
-
           axios
-          .get('http://localhost:8000/perfil/')
-          .then(response => (this.info = response))
+          .get('https://zupport.herokuapp.com/perfil/', {
+            headers: {
+              'Authorization': "Token 64a49b9f95c2aaeafe76b77df235f6c56685d1c5"
+            }
+          }).then(
+            response => (
+              this.info = response
+            )
+          );
+        },
+        filters: {
+          moment: function (date) {
+            moment.locale('es')
+            return moment(date).format('[Desde el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
+          }
         }
       })
     </script>
 </body>
-
 </html>
