@@ -58,166 +58,169 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    <!-- Start Header Top Area -->
-    <div class="header-top-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <div class="logo-area">
-                        <a href="../index.html"><img src="../img/logo/logo.png" alt="logo"/></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Header Top Area -->
-    <!-- Mobile Menu start -->
-    <div class="mobile-menu-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="mobile-menu">
-                        <nav id="dropdown">
-                            <ul class="mobile-menu-nav">
-                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Ayuda</a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                        <li><a href="help.html">Nueva</a>
-                                        </li>
-                                        <li><a href="consultas.html">Consultas</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a data-toggle="collapse" data-target="#profile">Perfil</a>
-                                    <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="profile.html">Mi perfil</a></li>
-                                        <li><a id="logout" href="">Salir</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Mobile Menu end -->
-    <!-- Main Menu area start-->
-    <div class="main-menu-area mg-tb-40">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-edit"></i> Ayuda</a>
-                        </li>
-                        <li class="active"><a data-toggle="tab" href="#profile"><i class="notika-icon notika-support"></i> Perfil</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content custom-menu-content">
-                        <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="help.html">Nueva</a>
-                                </li>
-                                <li><a href="consultas.html">Consultas</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="profile" class="active tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="profile.html">Mi perfil</a>
-                                </li>
-                                <li><a id="logout" href="">Salir</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Main Menu area End-->
-	<!-- Breadcomb area Start-->
-	<div class="breadcomb-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="breadcomb-list">
-						<div class="row">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<div class="breadcomb-wp">
-									<div class="breadcomb-icon">
-										<i class="notika-icon notika-support"></i>
-									</div>
-									<div class="breadcomb-ctn">
-										<h2>Perfil</h2>
-										<p>Tu información personal en un sólo lugar</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Breadcomb area End-->
-
-  <!-- Invoice area Start-->
-  <div class="invoice-area">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <div class="invoice-wrap">
-                      <div class="invoice-img">
-
-                      </div>
-                      <div id="app" class="invoice-hds-pro">
-                        <table class="table table-hover">
-                          <tbody>
-                            <tr>
-                              <td class="text-right"><strong>Nombre</strong></td>
-                              <td>{{ info.data[0].nombre }} {{ info.data[0].apellido }}</td>
-                            </tr>
-                            <tr>
-                              <td class="text-right"><strong>Correo electrónico</strong></td>
-                              <td>{{ info.data[0].usuario.username }}</td>
-                            </tr>
-                            <tr>
-                              <td class="text-right"><strong>Rol</strong></td>
-                              <td v-if="info.data[0].rol == '0'">Cliente</td>
-                              <td v-if="info.data[0].rol == '1'">Asistente</td>
-                              <td v-if="info.data[0].rol == '2'">Administrador</td>
-                            </tr>
-                            <tr>
-                              <td class="text-right"><strong>Con nosotros desde</strong></td>
-                              <td>{{ info.data[0].timestamp | moment}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
+    <div id="app">
+      <!--[if lt IE 8]>
+              <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+      <!-- Start Header Top Area -->
+      <div class="header-top-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xs-12 text-center">
+                      <div class="logo-area">
+                          <a href="../index.html"><img src="../img/logo/logo.png" alt="logo"/></a>
                       </div>
                   </div>
               </div>
           </div>
       </div>
-  </div>
-  <!-- Invoice area End-->
+      <!-- End Header Top Area -->
+      <!-- Mobile Menu start -->
+      <div class="mobile-menu-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="mobile-menu">
+                          <nav id="dropdown">
+                              <ul class="mobile-menu-nav">
+                                  <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Ayuda</a>
+                                      <ul id="Pagemob" class="collapse dropdown-header-top">
+                                          <li><a href="help.html">Nueva</a>
+                                          </li>
+                                          <li><a href="consultas.html">Consultas</a>
+                                          </li>
+                                      </ul>
+                                  </li>
+                                  <li><a data-toggle="collapse" data-target="#profile">Perfil</a>
+                                      <ul id="demoevent" class="collapse dropdown-header-top">
+                                          <li><a href="profile.html">Mi perfil</a></li>
+                                          <li><a id="logout" href="">Salir</a></li>
+                                      </ul>
+                                  </li>
+                              </ul>
+                          </nav>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Mobile Menu end -->
+      <!-- Main Menu area start-->
+      <div class="main-menu-area mg-tb-40">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                          <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-edit"></i> Ayuda</a>
+                          </li>
+                          <li class="active"><a data-toggle="tab" href="#profile"><i class="notika-icon notika-support"></i> Perfil</a>
+                          </li>
+                      </ul>
+                      <div class="tab-content custom-menu-content">
+                          <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
+                              <ul class="notika-main-menu-dropdown">
+                                  <li><a href="help.html">Nueva</a>
+                                  </li>
+                                  <li><a href="consultas.html">Consultas</a>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div id="profile" class="active tab-pane notika-tab-menu-bg animated flipInX">
+                              <ul class="notika-main-menu-dropdown">
+                                  <li><a href="profile.html">Mi perfil</a>
+                                  </li>
+                                  <li><a id="logout" href="" v-on:click="logout()">Salir</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Main Menu area End-->
+  	<!-- Breadcomb area Start-->
+  	<div class="breadcomb-area">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  					<div class="breadcomb-list">
+  						<div class="row">
+  							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  								<div class="breadcomb-wp">
+  									<div class="breadcomb-icon">
+  										<i class="notika-icon notika-support"></i>
+  									</div>
+  									<div class="breadcomb-ctn">
+  										<h2>Perfil</h2>
+  										<p>Tu información personal en un sólo lugar</p>
+  									</div>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  	<!-- Breadcomb area End-->
 
-    <!-- Start Footer area-->
-    <div class="footer-copyright-area">
+    <!-- Invoice area Start-->
+    <div class="invoice-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="footer-copy-right">
-                        <p>Copyright © 2018
-. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                    <div class="invoice-wrap">
+                        <div class="invoice-img">
+
+                        </div>
+                        <div class="invoice-hds-pro">
+                          <table class="table table-hover">
+                            <tbody>
+                              <tr>
+                                <td class="text-right"><strong>Nombre</strong></td>
+                                <td>{{ info.data[0].nombre }} {{ info.data[0].apellido }}</td>
+                              </tr>
+                              <tr>
+                                <td class="text-right"><strong>Correo electrónico</strong></td>
+                                <td>{{ info.data[0].usuario.username }}</td>
+                              </tr>
+                              <tr>
+                                <td class="text-right"><strong>Rol</strong></td>
+                                <td v-if="info.data[0].rol == '0'">Cliente</td>
+                                <td v-if="info.data[0].rol == '1'">Asistente</td>
+                                <td v-if="info.data[0].rol == '2'">Administrador</td>
+                              </tr>
+                              <tr>
+                                <td class="text-right"><strong>Con nosotros desde</strong></td>
+                                <td>{{ info.data[0].timestamp | moment}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Footer area-->
+    <!-- Invoice area End-->
+
+      <!-- Start Footer area-->
+      <div class="footer-copyright-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="footer-copy-right">
+                          <p>Copyright © 2018
+  . All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- End Footer area-->
+    </div>
+
     <!-- jquery
 		============================================ -->
     <script src="../js/vendor/jquery-1.12.4.min.js"></script>
@@ -296,22 +299,33 @@
             info: null
           }
         },
-        mounted () {
+        created () {
           axios
           .get('https://zupport.herokuapp.com/perfil/', {
             headers: {
-              'Authorization': "Token 64a49b9f95c2aaeafe76b77df235f6c56685d1c5"
+              'Authorization': "Token "+localStorage.getItem('token')
             }
           }).then(
             response => (
               this.info = response
             )
+          ).catch(
+            error => {
+              if (error.response.status == 401) {
+                window.location.href = "login.html";
+              }
+            }
           );
         },
         filters: {
           moment: function (date) {
             moment.locale('es')
             return moment(date).format('[Desde el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
+          }
+        },
+        methods: {
+          logout: function () {
+            localStorage.clear();
           }
         }
       })
