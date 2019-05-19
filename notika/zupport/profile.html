@@ -303,18 +303,29 @@
           axios
           .get('https://zupport.herokuapp.com/perfil/', {
             headers: {
-              'Authorization': "Token 64a49b9f95c2aaeafe76b77df235f6c56685d1c5"
+              'Authorization': "Token "+localStorage.getItem('token')
             }
           }).then(
             response => (
               this.info = response
             )
+          ).catch(
+            error => {
+              if (error.response.status == 401) {
+                window.location.href = "login.html";
+              }
+            }
           );
         },
         filters: {
           moment: function (date) {
             moment.locale('es')
             return moment(date).format('[Desde el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
+          }
+        },
+        methods: {
+          logout: function () {
+            localStorage.clear();
           }
         }
       })
