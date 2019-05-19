@@ -68,13 +68,13 @@
                 <div class="input-group">
                     <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
                     <div class="nk-int-st">
-                        <input type="text" class="form-control" placeholder="Email" v-model="user">
+                        <input type="text" class="form-control" placeholder="Email" v-model="email">
                     </div>
                 </div>
                 <div class="input-group mg-t-15">
                     <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
                     <div class="nk-int-st">
-                        <input type="password" class="form-control" placeholder="Password" v-model="pass">
+                        <input type="password" class="form-control" placeholder="Password" v-model="password">
                     </div>
                 </div>
             </div>
@@ -163,8 +163,8 @@
         el: '#app',
         data () {
           return {
-            email: user,
-            password: pass
+            email: null,
+            password: null
           }
         },
         methods: {
@@ -172,18 +172,23 @@
             axios.post(
               'http://zupport.herokuapp.com/login/',
               {
-                email: 'emartinezpinzon@gmail.com',
-                password: 'storengo'
+                email: this.email,
+                password: this.password
               }
             ).then(
               response => {
                 if (response.status == 200) {
                   localStorage.setItem('rol', response.data.rol);
                   localStorage.setItem('token', response.data.token);
-
-                  console.log(this.email);
-
                   window.location.href = "profile.html"
+                }
+              }
+            ).catch(
+              error => {
+                if (error.response.status == 401) {
+                  console.log("Datos incorrectos");
+                }else if (error.response.status == 404) {
+                  console.log("Usuario no existe");
                 }
               }
             );
