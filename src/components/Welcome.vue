@@ -29,8 +29,8 @@
                     </a>
                   </form>
                   <hr>
-                  <div class="text-center">
-                    <a class="small" href="register.html">Create an Account!</a>
+                  <div v-on:click="toReg" class="text-center">
+                    <a class="btn-block" >Crear una cuenta</a>
                   </div>
                 </div>
               </div>
@@ -58,6 +58,12 @@ export default {
   methods:{
     login(){
       this.$emit('login',this.email,this.password)
+    },
+    toReg(){
+      console.log('working')
+      var comp = 'Join'
+      this.$emit('swapcomp',comp);
+      console.log(comp)
     }
   }
 }

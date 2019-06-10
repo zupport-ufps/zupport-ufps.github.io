@@ -5,6 +5,7 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import Welcome from './components/Welcome.vue'
+import Join from './components/Join.vue'
 import Platform from './components/Platform.vue'
 
 export default {
@@ -12,6 +13,7 @@ export default {
   components: {
     HelloWorld,
     Welcome,
+    Join,
     Platform
   },
   data(){
@@ -21,7 +23,9 @@ export default {
   },
   methods:{
     swapcomp: function(comp){
-      this.currentcomp=comp
+      console.log('working2')
+      var self = this
+      self.currentcomp='Join'
     },
     login: function(email,password){
       var self = this
