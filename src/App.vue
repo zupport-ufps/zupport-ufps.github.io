@@ -20,28 +20,25 @@ export default {
     }
   },
   methods:{
-
+    swapcomp: function(comp){
+      this.currentcomp=comp
+    },
     login: function(email,password){
-
+      var self = this
       localStorage.clear()
       console.log('working');
       axios.post('https://zupport.herokuapp.com/login/',{
         email: email,
         password: password
       }).then(function(response){
+
         localStorage.setItem('id',response.data.id)
         localStorage.setItem('permisos',response.data.permisos)
         localStorage.setItem('token',response.data.token)
         console.log(localStorage);
-      })
-      
-      if(localStorage.getItem('id')!=null){
-        this.currentcomp='Platform'
-      }
+        self.currentcomp='Platform';
+      });
 
-    },
-    swapcomp: function(comp){
-      this.currentcomp=comp
     }
 
   }

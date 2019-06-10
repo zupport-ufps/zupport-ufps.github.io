@@ -1,39 +1,48 @@
 <template>
     
-    <div class="container-fluid fullH">
+    <div class="container">
 
-      <div class="row">
-        <div class="col-lg-6 offset-lg-3">
-          <div class="card vmiddle">
-          <article class="card-body">
-          <a href="" class="float-right btn btn-outline-primary">Ya tienes cuenta?</a>
-          <h4 class="card-title mb-4 mt-1">Bienvenido a Zupport</h4>
-            <form>
-              <div class="form-group">
-                <label>Correo</label>
-                  <input name="" class="form-control" v-model="email" placeholder="Correo electronico registrado" type="email">
-              </div> <!-- form-group// -->
-              <div class="form-group">
-                <a class="float-right" href="#">Lo olvidaste?</a>
-                <label>Contraseña</label>
-                  <input class="form-control" v-model="password" placeholder="******" type="password">
-              </div> <!-- form-group// --> 
-              <div class="form-group"> 
-              <div class="checkbox">
-                <label> <input type="checkbox"> Recordar contraseña </label>
-              </div> <!-- checkbox .// -->
-              </div> <!-- form-group// -->  
-                                                                      
-          </form>
-            <div class="form-group">
-                  <button v-on:click="login" class="btn btn-primary btn-block"> Entrar  </button>
-              </div> <!-- form-group// -->   
-          </article>
-        </div> <!-- card.// -->
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
+                  </div>
+                  <form class="user">
+                    <div class="form-group">
+                      <input type="email" v-model="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Ingrese correo...">
+                    </div>
+                    <div class="form-group">
+                      <input type="password" v-model="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña">
+                    </div>
+                    <a v-on:click="login" class="btn btn-primary btn-user btn-block" style="color:white">
+                      Ingresar
+                    </a>
+                  </form>
+                  <hr>
+                  <div class="text-center">
+                    <a class="small" href="register.html">Create an Account!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
-      
+
     </div>
+
+  </div>
     
 </template>
 
