@@ -1,0 +1,416 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Consulta | Zupport</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!-- font awesome CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/owl.theme.css">
+    <link rel="stylesheet" href="../css/owl.transitions.css">
+    <!-- meanmenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/meanmenu/meanmenu.min.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/normalize.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- Notika icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/notika-custom-icon.css">
+    <!-- wave CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/wave/waves.min.css">
+    <link rel="stylesheet" href="../css/wave/button.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Start Header Top Area -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <div class="logo-area">
+                        <a href="../index.html"><img src="../img/logo/logo.png" alt="logo"/></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top Area -->
+    <!-- Mobile Menu start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul class="mobile-menu-nav">
+                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Ayuda</a>
+                                    <ul id="Pagemob" class="collapse dropdown-header-top">
+                                        <li><a href="help.html">Nueva</a>
+                                        </li>
+                                        <li><a href="consultas.html">Consultas</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#profile">Perfil</a>
+                                    <ul id="demoevent" class="collapse dropdown-header-top">
+                                        <li><a href="profile.html">Mi perfil</a></li>
+                                        <li><a id="logout" v-on:click="logout()" href="">Salir</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu end -->
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                        <li class="active"><a data-toggle="tab" href="#Page"><i class="notika-icon notika-edit"></i> Ayuda</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#profile"><i class="notika-icon notika-support"></i> Perfil</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="Page" class="active tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="help.html">Nueva</a>
+                                </li>
+                                <li><a href="consultas.html">Consultas</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="profile" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="profile.html">Mi perfil</a>
+                                </li>
+                                <li><a id="logout" v-on:click="logout()" href="">Salir</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area End-->
+    <!-- Breadcomb area Start-->
+  	<div class="breadcomb-area">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  					<div class="breadcomb-list">
+  						<div class="row">
+  							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  								<div class="breadcomb-wp">
+  									<div class="breadcomb-icon">
+  										<i class="notika-icon notika-app"></i>
+  									</div>
+  									<div class="breadcomb-ctn">
+  										<h2>Consulta</h2>
+  										<p>La información detallada de tu consulta</p>
+  									</div>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  	<!-- Breadcomb area End-->
+
+    <!-- Area Start-->
+    <div class="invoice-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="invoice-wrap">
+                      <div class="invoice-img">
+                        <h3 style="color: #fff; text-align: center;">{{ info.asunto }}</h3>
+                      </div>
+                      <div class="invoice-hds-pro">
+                        <br>
+                        <p>Descripcion de su solicitud: </p>
+                        <p>{{ info.descripcion }}</p>
+                        <br>
+                        <p v-if="info.asesor == null">Aún no se ha asignado un asesor</p>
+                        <p v-else>Está asignado al asesor: {{ info.asesor.nombre }} {{ info.asesor.apellido }}</p>
+
+                        <p>Registrada a la empresa: {{ info.empresa.nombre }}</p>
+
+                        <div style="text-align:right;">
+                          <p>{{ info.timestamp | moment}}</p>
+                          <p v-if="info.resuelto">Esta tarea ya está resuelta</p>
+                          <a v-else class="btn btn-success notika-btn-success" v-on:click="resolver()"><i class="notika-icon notika-checked"></i> Marcar como finalizada</a>
+                        </div>
+                        <hr>
+                      </div>
+                      <div class="invoice-hds-pro">
+                        <h3>Comentarios</h3>
+                        <br>
+                      </div>
+                      <div v-if="comentarios.length == 0">
+                        <span style="text-align:center;">Aún no se han registrado comentarios</span>
+                        <hr>
+                      </div>
+                      <div v-for="comentario in comentarios">
+                        <h4 style="color: #032a1e;"> {{ comentario.autor.nombre }} {{ comentario.autor.apellido }} </h4>
+                        <p v-if="comentario.autor.rol == '0'">(Autor)</p>
+                        <p v-if="comentario.autor.rol == '1'">(Asesor)</p>
+                        <p>{{ comentario.info }}</p>
+                        <p style="text-align:right">{{ comentario.timestamp | moment}}</p>
+                        <hr>
+                      </div>
+                      <div class="invoice-hds-pro">
+                        <div class="form-group">
+                          <h3>Agregar comentario</h3>
+                          <br>
+                          <div class="nk-int-st">
+                            <input class="form-control" type="text" placeholder="Escriba aqu&iacute; su comentario" v-model="comentario"></input>
+                          </div>
+                          <br>
+                          <br>
+                          <div style="text-align:right;">
+                            <a class="btn btn-success notika-btn-success" v-on:click="new_comment()">Comentar</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Area End-->
+    <!-- Solicitudes de  area End-->
+
+    <!-- Start Footer area-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright © 2018
+. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+
+    <!-- End Footer area-->
+    <!-- jquery
+        ============================================ -->
+    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="../js/bootstrap.min.js"></script>
+    <!-- wow JS
+        ============================================ -->
+    <script src="../js/wow.min.js"></script>
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="../js/jquery-price-slider.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="../js/owl.carousel.min.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="../js/jquery.scrollUp.min.js"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="../js/meanmenu/jquery.meanmenu.js"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="../js/counterup/jquery.counterup.min.js"></script>
+    <script src="../js/counterup/waypoints.min.js"></script>
+    <script src="../js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="../js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="../js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="../js/sparkline/sparkline-active.js"></script>
+    <!-- flot JS
+        ============================================ -->
+    <script src="../js/flot/jquery.flot.js"></script>
+    <script src="../js/flot/jquery.flot.resize.js"></script>
+    <script src="../js/flot/flot-active.js"></script>
+    <!-- knob JS
+        ============================================ -->
+    <script src="../js/knob/jquery.knob.js"></script>
+    <script src="../js/knob/jquery.appear.js"></script>
+    <script src="../js/knob/knob-active.js"></script>
+    <!--  wave JS
+        ============================================ -->
+    <script src="../js/wave/waves.min.js"></script>
+    <script src="../js/wave/wave-active.js"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="../js/icheck/icheck.min.js"></script>
+    <script src="../js/icheck/icheck-active.js"></script>
+    <!--  todo JS
+        ============================================ -->
+    <script src="../js/todo/jquery.todo.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="../js/plugins.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="../js/main.js"></script>
+
+    <!-- Moment JS
+    ============================================ -->
+    <script src="../js/moment.js"></script>
+
+    <!-- Vue.js
+    ============================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+      new Vue({
+        el: '#app',
+        data () {
+          return {
+            info: null,
+            comentarios: null,
+            comentario: null
+          }
+        },
+        mounted () {
+          axios.all([
+            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+localStorage.getItem('id_consulta')+'/', {
+              headers: {
+                'Authorization': "Token "+localStorage.getItem('token')
+              }
+            }),
+            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+localStorage.getItem('id_consulta')+'/comentarios/', {
+              headers: {
+                'Authorization': "Token "+localStorage.getItem('token')
+              }
+            })
+          ]).then(
+            axios.spread(
+              (response1, response2) => {
+                this.info = response1.data
+                this.comentarios = response2.data
+              }
+            )
+          ).catch(error => {
+            console.log(error);
+          });
+
+        },
+        methods: {
+          new_comment: function () {
+            axios.post(
+              'https://zupport.herokuapp.com/ayuda/comentario/',
+              {
+                comentario: this.comentario,
+                solicitud_id: localStorage.getItem('id_consulta')
+              },
+              {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              }
+            ).then(
+              response => {
+                if (response.status == 201) {
+                  location.reload()
+                }
+              }
+            ).catch(
+              error => {
+                if (error.response.status == 401) {
+                  window.location.href = "login.html";
+                }
+              }
+            );
+          },
+          resolver: function() {
+            axios.put(
+              'https://zupport.herokuapp.com/ayuda/solicitud/'+localStorage.getItem('id_consulta')+'/',
+              {
+              },
+              {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              }
+            ).then(
+              response => {
+                if (response.status == 200) {
+                  location.reload()
+                }
+              }
+            ).catch(
+              error => {
+                if (error.response.status == 401) {
+                  console.log("No permitido");
+                }
+              }
+            );
+          }
+        },
+        filters: {
+          moment: function (date) {
+            moment.locale('es')
+            return moment(date).format('[Publicado el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
+          }
+        }
+      })
+    </script>
+</body>
+</html>
