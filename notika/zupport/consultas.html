@@ -58,6 +58,7 @@
 </head>
 
 <body>
+  <div id="app">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -146,7 +147,7 @@
                     <div class="row">
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                             <div class="breadcomb-ctn">
-                                <h1>Ayuda</h1>
+                                <h1>Tus solicitudes de ayuda</h1>
                             </div>
                         </div>
                     </div>
@@ -156,40 +157,21 @@
     </div>
     <!-- Breadcomb area End-->
 
-    <!-- Solicitudes area End-->
-    <div class="breadcomb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                            <div class="breadcomb-ctn">
-                                <h2>Tus solicitudes de ayuda</h2>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            <button class="btn btn-success notika-btn-success">Cont&aacute;ctanos</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Area Start-->
     <div class="invoice-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="invoice-wrap">
-                        <div id="app" class="invoice-hds-pro">
-                            <p style="color: #03A9F4;">¿Donde puedo ver todas las solicitudes de ayuda que he hecho?</p>
-                            <p>Solicitud: #00000001</p>
-                        </div>
-                        <hr>
-                        <div id="app" class="invoice-hds-pro">
-                            <p style="color: #03A9F4;">Mover mensajes de un canal a otro</p>
-                            <p>Solicitud: #000000</p>
+                      <hr>
+                        <div class="invoice-hds-pro" v-for="consulta in info">
+                            <h3 style="color: #03A9F4;"><a v-on:click="redirect(consulta.id)">{{ consulta.asunto }}</a></h3>
+                            <br>
+                            <p v-if="consulta.asesor == null">Aún no se ha asignado un asesor</p>
+                            <p v-else>Está asignado al asesor: {{ consulta.asesor.nombre }} {{ consulta.asesor.apellido }}</p>
+                            <p>Registrada a la empresa: {{ consulta.empresa.nombre }}</p>
+                            <p>{{ consulta.timestamp | moment}}</p>
+                          <hr>
                         </div>
                     </div>
                 </div>
@@ -198,50 +180,6 @@
     </div>
     <!-- Area End-->
     <!-- Solicitudes de  area End-->
-
-    <br>
-
-    <!-- Centro de ayuda area End-->
-    <div class="breadcomb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                            <div class="breadcomb-ctn">
-                                <h2>Centro de ayuda</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- area Start-->
-    <div class="invoice-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="invoice-wrap">
-                        <div id="app" class="invoice-hds-pro">
-                            <p>¿Buscas respuestas? Explora nuestro <a> Centro de ayuda:</a></p>
-                            <div class="tpgp-al-cl mg-t-20">
-                                <ul class="tpgp-ctm-angle">
-                                    <li><i class="notika-icon notika-next-pro"></i> Primero pasos</li>
-                                    <li><i class="notika-icon notika-next-pro"></i> Como utilizar Zupport</li>
-                                    <li><i class="notika-icon notika-next-pro"></i> Tu perfil y preferencias</li>
-                                    <li><i class="notika-icon notika-next-pro"></i> Añade herramientas al inicio de Zupport</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- area End-->
-    <!-- Centro de ayuda area End-->
 
     <!-- Start Footer area-->
     <div class="footer-copyright-area">
@@ -256,6 +194,8 @@
             </div>
         </div>
     </div>
+  </div>
+
     <!-- End Footer area-->
     <!-- jquery
         ============================================ -->
@@ -337,20 +277,26 @@
         },
         mounted () {
           axios
-          .get('https://zupport.herokuapp.com/perfil/', {
+          .get('https://zupport.herokuapp.com/ayuda/solicitud/', {
             headers: {
-              'Authorization': "Token 64a49b9f95c2aaeafe76b77df235f6c56685d1c5"
+              'Authorization': "Token "+localStorage.getItem('token')
             }
           }).then(
             response => (
-              this.info = response
+              this.info = response.data
             )
           );
+        },
+        methods: {
+          redirect: function (id) {
+            localStorage.setItem('id_consulta', id);
+            window.location.href = "consulta.html"
+          }
         },
         filters: {
           moment: function (date) {
             moment.locale('es')
-            return moment(date).format('[Desde el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
+            return moment(date).format('[Creada el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
           }
         }
       })
