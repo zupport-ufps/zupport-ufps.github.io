@@ -204,7 +204,7 @@
                                         </div>
                                     </div>
                                     <div class="input-group mg-t-15">
-                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
                                         <div class="nk-int-st">
                                             <input type="text" class="form-control" placeholder="Apellido" v-model="apellido">
                                         </div>
@@ -348,7 +348,10 @@
         el: '#app',
         data () {
           return {
-            empresa: null,
+            nombre: null,
+            apellido: null,
+            email: null,
+            password: null,
             rol: null,
             roles: [
               { text: 'Asesor', value: 1 },
@@ -362,10 +365,13 @@
           },
           registro: function () {
             axios.post(
-              'https://zupport.herokuapp.com/empresa/todas/',
+              'https://zupport.herokuapp.com/registro/admin/',
               {
-                nombre: this.empresa,
-
+                nombre: this.nombre,
+                apellido: this.apellido,
+                email: this.email,
+                password: this.password,
+                rol: this.rol
               },
               {
                 headers: {
@@ -375,7 +381,7 @@
             ).then(
               response => {
                 if (response.status == 201) {
-                  window.location.href = "empresas.html";
+                  location.reload()
                 }
               }
             ).catch(
