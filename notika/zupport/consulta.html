@@ -94,7 +94,7 @@
                                 <li><a data-toggle="collapse" data-target="#profile">Perfil</a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">
                                         <li><a href="profile.html">Mi perfil</a></li>
-                                        <li><a id="logout" href="">Salir</a></li>
+                                        <li><a id="logout" v-on:click="logout()" href="">Salir</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -129,7 +129,7 @@
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="profile.html">Mi perfil</a>
                                 </li>
-                                <li><a id="logout" href="">Salir</a>
+                                <li><a id="logout" v-on:click="logout()" href="">Salir</a>
                                 </li>
                             </ul>
                         </div>
