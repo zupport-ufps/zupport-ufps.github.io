@@ -44,6 +44,9 @@
         ============================================ -->
     <link rel="stylesheet" href="../../css/wave/waves.min.css">
     <link rel="stylesheet" href="../../css/wave/button.css">
+    <!-- bootstrap select CSS
+    ============================================ -->
+    <link rel="stylesheet" href="../../css/bootstrap-select/bootstrap-select.css">
     <!-- main CSS
         ============================================ -->
     <link rel="stylesheet" href="../../css/main.css">
@@ -120,15 +123,15 @@
               <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                       <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                          <li class="active"><a data-toggle="tab" href="#Page"><i class="notika-icon notika-edit"></i> Empresa</a>
+                          <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-edit"></i> Empresa</a>
                           </li>
-                          <li><a data-toggle="tab" href="#asesores"><i class="notika-icon notika-support"></i> Staff</a>
+                          <li class="active"><a data-toggle="tab" href="#asesores"><i class="notika-icon notika-support"></i> Staff</a>
                           </li>
                           <li><a data-toggle="tab" href="#profile"><i class="notika-icon notika-support"></i> Perfil</a>
                           </li>
                       </ul>
                       <div class="tab-content custom-menu-content">
-                          <div id="Page" class="active tab-pane notika-tab-menu-bg animated flipInX">
+                          <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
                               <ul class="notika-main-menu-dropdown">
                                 <li><a href="nueva_empresa.html">Nueva</a>
                                 </li>
@@ -138,7 +141,7 @@
                                 </li>
                               </ul>
                           </div>
-                          <div id="asesores" class="tab-pane notika-tab-menu-bg animated flipInX">
+                          <div id="asesores" class="active tab-pane notika-tab-menu-bg animated flipInX">
                               <ul class="notika-main-menu-dropdown">
                                 <li><a href="nuevo_usuario.html">Registrar Staff</a>
                                 </li>
@@ -158,6 +161,33 @@
           </div>
       </div>
       <!-- Main Menu area End-->
+
+      <!-- Breadcomb area Start-->
+      <div class="breadcomb-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="breadcomb-list">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="breadcomb-wp">
+                      <div class="breadcomb-icon">
+                        <i class="notika-icon notika-support"></i>
+                      </div>
+                      <div class="breadcomb-ctn">
+                        <h2>Registrar miembro del Staff</h2>
+                        <p>Registre un nuevo miembro del Staff de Zupport</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Breadcomb area End-->
+
       <div class="breadcomb-area">
           <div class="container">
               <div class="row">
@@ -165,17 +195,44 @@
                       <div class="form-element-list mg-t-30">
                           <div class="row">
                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="invoice-img">
-                                  <h3 style="color: #fff; text-align: center;">Registrar empresa</h3>
-                                </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="invoice-hds-pro">
                                   <div class="form-group">
-                                    <div class="nk-int-st">
-                                      <input class="form-control" type="text" placeholder="Nombre de la empresa" v-model="empresa"></input>
+                                    <div class="input-group mg-t-15">
+                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                                        <div class="nk-int-st">
+                                            <input type="text" class="form-control" placeholder="Nombre" v-model="nombre">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mg-t-15">
+                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                                        <div class="nk-int-st">
+                                            <input type="text" class="form-control" placeholder="Apellido" v-model="apellido">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mg-t-15">
+                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                                        <div class="nk-int-st">
+                                            <input type="text" class="form-control" placeholder="Email" v-model="email">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mg-t-15">
+                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                                        <div class="nk-int-st">
+                                            <input type="password" class="form-control" placeholder="Contraseña" v-model="password">
+                                        </div>
+                                    </div>
+                                    <div class="input-group mg-t-15">
+                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                                        <div class="nk-int-st">
+                                          <div class="bootstrap-select fm-cmp-mg">
+                                              <select class="selectpicker" v-model="rol">
+                                                <option>Seleccione uno</option>
+                                                <option v-for="option in roles" v-bind:value="option.value">
+                                                  {{ option.text }}
+                                                </option>
+                                              </select>
+                                          </div>
+                                        </div>
                                     </div>
                                     <br>
                                     <br>
@@ -269,6 +326,10 @@
         ============================================ -->
     <script src="../../js/main.js"></script>
 
+    <!-- bootstrap select JS
+		============================================ -->
+    <script src="../../js/bootstrap-select/bootstrap-select.js"></script>
+
     <!-- Moment JS
     ============================================ -->
     <script src="../../js/moment.js"></script>
@@ -287,7 +348,15 @@
         el: '#app',
         data () {
           return {
-            empresa: null,
+            nombre: null,
+            apellido: null,
+            email: null,
+            password: null,
+            rol: null,
+            roles: [
+              { text: 'Asesor', value: 1 },
+              { text: 'Administrador', value: 2 }
+            ]
           }
         },
         methods: {
@@ -296,10 +365,13 @@
           },
           registro: function () {
             axios.post(
-              'https://zupport.herokuapp.com/empresa/todas/',
+              'https://zupport.herokuapp.com/registro/admin/',
               {
-                nombre: this.empresa,
-
+                nombre: this.nombre,
+                apellido: this.apellido,
+                email: this.email,
+                password: this.password,
+                rol: this.rol
               },
               {
                 headers: {
@@ -309,7 +381,7 @@
             ).then(
               response => {
                 if (response.status == 201) {
-                  window.location.href = "empresas.html";
+                  location.reload()
                 }
               }
             ).catch(
