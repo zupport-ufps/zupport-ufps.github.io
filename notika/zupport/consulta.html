@@ -140,22 +140,30 @@
     </div>
     <!-- Main Menu area End-->
     <!-- Breadcomb area Start-->
-    <div class="breadcomb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                            <div class="breadcomb-ctn">
-                                <h1>  {{ info.asunto }}</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcomb area End-->
+  	<div class="breadcomb-area">
+  		<div class="container">
+  			<div class="row">
+  				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  					<div class="breadcomb-list">
+  						<div class="row">
+  							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  								<div class="breadcomb-wp">
+  									<div class="breadcomb-icon">
+  										<i class="notika-icon notika-app"></i>
+  									</div>
+  									<div class="breadcomb-ctn">
+  										<h2>Consulta</h2>
+  										<p>La información detallada de tu consulta</p>
+  									</div>
+  								</div>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</div>
+  	<!-- Breadcomb area End-->
 
     <!-- Area Start-->
     <div class="invoice-area">
@@ -163,30 +171,22 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="invoice-wrap">
-                      <hr>
-                        <div class="invoice-hds-pro" >
-                            
-       <!-- <h3 style="color: #03A9F4;">{{ info.asunto }}</h3>
-                          
--->
-  <br>
+                      <div class="invoice-img">
+                        <h3 style="color: #fff; text-align: center;">{{ info.asunto }}</h3>
+                      </div>
+                      <div class="invoice-hds-pro">
+                        <br>
+                        <p>Descripcion de su solicitud: </p>
+                        <p>{{ info.descripcion }}</p>
+                        <br>
+                        <p v-if="info.asesor == null">Aún no se ha asignado un asesor</p>
+                        <p v-else>Está asignado al asesor: {{ info.asesor.nombre }} {{ info.asesor.apellido }}</p>
 
+                        <p>Registrada a la empresa: {{ info.empresa.nombre }}</p>
 
-       <p>Descripcion de su solicitud: {{ info.descripcion }}</p>
-
-       <p v-if="info.asesor == null">Aún no se ha asignado un asesor</p>
-       <p v-else>Está asignado al asesor: {{ info.asesor.nombre }} {{ info.asesor.apellido }}</p>
-
-       <p>Registrada a la empresa: {{ info.empresa.nombre }}</p>
-
-       <p>{{ info.timestamp | moment}}</p>
-
-
-
-
-
-                          <hr>
-                        </div>
+                        <p>{{ info.timestamp | moment}}</p>
+                        <hr>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -295,6 +295,7 @@
           }
         },
         mounted () {
+          /**
           axios
           .get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/', {
             headers: {
@@ -304,15 +305,46 @@
             response => (
               this.info = response.data
             )
+          ),
+          axios
+          .get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/comentarios/', {
+            headers: {
+              'Authorization': "Token "+localStorage.getItem('token')
+            }
+          }).then(
+            response => (
+              this.comentarios = response.data
+            )
           )
+*/
 
-          
+          axios.all([
+            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/', {
+              headers: {
+                'Authorization': "Token "+localStorage.getItem('token')
+              }
+            }),
+            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/comentarios/', {
+              headers: {
+                'Authorization': "Token "+localStorage.getItem('token')
+              }
+            })
+          ]).then(
+            axios.spread(
+              (response1, response2) => {
+            console.log(response1.data);
+            console.log(response2.data);
+            this.info = response1.data
+            this.comentarios = response2.data
+            })
+          ).catch(error => {
+            console.log(error);
+          });
 
         },
         methods: {
-          redirect: function (id) {
-            localStorage.setItem('id_consulta', id);
-            window.location.href = "consulta.html"
+          new_comment: function () {
+
           }
         },
         filters: {
