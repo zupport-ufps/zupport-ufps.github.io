@@ -184,7 +184,17 @@
 
                         <p>Registrada a la empresa: {{ info.empresa.nombre }}</p>
 
-                        <p>{{ info.timestamp | moment}}</p>
+                        <p style="text-align:right">{{ info.timestamp | moment}}</p>
+                        <hr>
+                      </div>
+                      <div class="invoice-hds-pro">
+                        <h3>Comentarios</h3>
+                        <br>
+                      </div>
+                      <div v-for="comentario in comentarios">
+                        <h4 style="color: #032a1e;"> {{ comentario.autor.nombre }} {{ comentario.autor.apellido }} </h4>
+                        <p>{{ comentario.info }}</p>
+                        <p style="text-align:right">{{ comentario.timestamp | moment}}</p>
                         <hr>
                       </div>
                     </div>
@@ -326,7 +336,7 @@
         filters: {
           moment: function (date) {
             moment.locale('es')
-            return moment(date).format('[Creada el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
+            return moment(date).format('[Publicado el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
           }
         }
       })
