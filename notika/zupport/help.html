@@ -300,52 +300,53 @@
                     empresa: null
                 }
             },
-            mounted () {
+            created () {
                 axios
-                .get('https://zupport.herokuapp.com/empresa/todas/', {
-                    headers: {
-                    'Authorization': "Token "+localStorage.getItem('token')
-                    }
-                }).then(
-                    response => (
-                    this.empresas = response.data
-                )
-            );
-        },
-        filters: {
-            moment: function (date) {
-                moment.locale('es')
-                return moment(date).format('[Desde el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
-            }
-        },
-        methods: {
-            solicitud: function () {
-                axios.post(
-                    'https://zupport.herokuapp.com/ayuda/solicitud/', {
-                        asunto: this.asunto,
-                        ayudarte: this.ayudarte,
-                        empresa: this.empresa
-                    }
-                ).then(
-                    response => {
-                        if (response.status == 200) {
-                            localStorage.setItem('rol', response.data.rol);
-                            localStorage.setItem('token', response.data.token);
-                            window.location.href = "help.html"
+                    .get('https://zupport.herokuapp.com/empresa/todas/', {
+                        headers: {
+                            'Authorization': "Token "+localStorage.getItem('token')
                         }
-                    }
-                ).catch(
-                    error => {
-                        if (error.response.status == 401) {
-                            console.log("Datos incorrectos");
-                        }else if (error.response.status == 404) {
-                            console.log("No se pudo registrar a solicitud");
+                    }).then(
+                        response => (
+                            this.empresas = response.data
+                        )
+                    ).catch(
+                        error => {
+                            if (error.response.status == 401) {
+                                //window.location.href = "login.html";
+                                console.log("Hay un problema de autorización")
+                            }
                         }
-                    }
-                );
+                    );
+            },
+            methods: {
+                solicitud: function () {
+                    axios.post(
+                        'https://zupport.herokuapp.com/ayuda/solicitud/', {
+                            asunto: this.asunto,
+                            ayudarte: this.ayudarte,
+                            empresa: this.empresa
+                        }
+                    ).then(
+                        response => {
+                            if (response.status == 200) {
+                                localStorage.setItem('rol', response.data.rol);
+                                localStorage.setItem('token', response.data.token);
+                                window.location.href = "help.html"
+                            }
+                        }
+                    ).catch(
+                        error => {
+                            if (error.response.status == 401) {
+                                console.log("Datos incorrectos");
+                            }else if (error.response.status == 404) {
+                                console.log("No se pudo registrar a solicitud");
+                            }
+                        }
+                    );
+                }
             }
-        }
-    })
+        })
     </script>
 </body>
 </html>
