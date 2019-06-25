@@ -184,7 +184,11 @@
 
                         <p>Registrada a la empresa: {{ info.empresa.nombre }}</p>
 
-                        <p style="text-align:right">{{ info.timestamp | moment}}</p>
+                        <div style="text-align:right;">
+                          <p>{{ info.timestamp | moment}}</p>
+                          <p v-if="info.resuelto">Esta tarea ya está resuelta</p>
+                          <a v-else class="btn btn-success notika-btn-success" v-on:click="resolver()"><i class="notika-icon notika-checked"></i> Marcar como finalizada</a>
+                        </div>
                         <hr>
                       </div>
                       <div class="invoice-hds-pro">
@@ -360,6 +364,30 @@
             ).then(
               response => {
                 if (response.status == 201) {
+                  location.reload()
+                }
+              }
+            ).catch(
+              error => {
+                if (error.response.status == 401) {
+                  console.log("No permitido");
+                }
+              }
+            );
+          },
+          resolver: function() {
+            axios.put(
+              'https://zupport.herokuapp.com/ayuda/solicitud/'+localStorage.getItem('id_consulta')+'/',
+              {
+              },
+              {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              }
+            ).then(
+              response => {
+                if (response.status == 200) {
                   location.reload()
                 }
               }
