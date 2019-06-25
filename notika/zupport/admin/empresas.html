@@ -174,7 +174,7 @@
                             <br>
                             <p>{{ empresa.timestamp | moment}}</p>
                             <div style="text-align:right;">
-                              <a class="btn btn-success notika-btn-success" v-on:click="redirect(empresa.id, empresa.nombre)">Asignar asesores</a>
+                              <a class="btn btn-danger notika-btn-danger" v-on:click="redirect_help(empresa.id)">Asignar consultas</a> <a class="btn btn-success notika-btn-success" v-on:click="redirect(empresa.id, empresa.nombre)">Asignar asesores</a>
                             </div>
                           <hr>
                         </div>
