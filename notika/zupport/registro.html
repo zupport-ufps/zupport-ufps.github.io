@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login | Zupport</title>
+    <title>Registrar | Zupport </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -54,18 +54,30 @@
 </head>
 
 <body>
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+
     <!-- Login Register area Start-->
     <div class="login-content" id="app">
-        <!-- Login -->
+        <!-- Registrar -->
         <div class="nk-block toggled" id="l-login">
             <div class="nk-form">
                 <div class="text-center">
-                  <h1>Login</h1>
+                  <h1>Crear cuenta</h1>
                 </div>
-                <div class="input-group">
+
+
+                <div class="input-group mg-t-15">
+                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" placeholder="Nombre" v-model="nombre">
+                    </div>
+                </div>
+                <div class="input-group mg-t-15">
+                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control" placeholder="Apellido" v-model="apellido">
+                    </div>
+                </div>
+                <div class="input-group mg-t-15">
                     <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
                     <div class="nk-int-st">
                         <input type="text" class="form-control" placeholder="Email" v-model="email">
@@ -78,12 +90,15 @@
                     </div>
                 </div>
                 <div class="input-group mg-t-15">
-                    <span class="input-group-addon">¿No estás registrado? <a href="registro.html">¡Registrate!</a> </span>
+                    <span class="input-group-addon">¿Ya tienes una cuenta? <a href="login.html">¡Inicia sesión!</a> </span>
                 </div>
             </div>
 
+
+
+
             <div class="nk-navigation nk-lg-ic">
-                <a href="#" data-ma-action="nk-login-switch" data-ma-block="#l-register" v-on:click="login()"><i class="notika-icon notika-right-arrow right-arrow-ant"></i> <span>Login</span></a>
+                <a href="#" data-ma-action="nk-login-switch" data-ma-block="#l-register" v-on:click="registro()"><i class="notika-icon notika-right-arrow right-arrow-ant"></i> <span>Registrar</span></a>
             </div>
         </div>
         <!-- Login -->
@@ -161,45 +176,42 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+
+
+
+
     <script type="text/javascript">
       new Vue({
         el: '#app',
         data () {
           return {
+            nombre: null,
+            apellido: null,
             email: null,
             password: null
           }
         },
         methods: {
-          login: function () {
+          registro: function () {
             axios.post(
-              'https://zupport.herokuapp.com/login/',
+              'https://zupport.herokuapp.com/registro/',
               {
+                nombre:this.nombre,
+                apellido:this.apellido,
                 email: this.email,
                 password: this.password
               }
             ).then(
               response => {
-                if (response.status == 200) {
-                  localStorage.setItem('rol', response.data.permisos);
-                  localStorage.setItem('token', response.data.token);
-
-                  var rol = localStorage.getItem("rol")
-                  if (rol == '0') {
-                    window.location.href = "profile.html"
-                  }else if (rol == '1') {
-                    window.location.href = "asesor/perfil.html"
-                  }else if (rol == '2') {
-                    window.location.href = "admin/perfil.html"
-                  }
+                if (response.status == 201) {
+                  window.location.href = "login.html"
                 }
               }
             ).catch(
               error => {
-                if (error.response.status == 401) {
-                  console.log("Datos incorrectos");
-                }else if (error.response.status == 404) {
-                  console.log("Usuario no existe");
+                if (error.response.status == 406) {
+
+                  console.log("Usuario ya existe");
                 }
               }
             );
