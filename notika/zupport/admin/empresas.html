@@ -174,7 +174,7 @@
                             <br>
                             <p>{{ empresa.timestamp | moment}}</p>
                             <div style="text-align:right;">
-                              <a class="btn btn-success notika-btn-success" v-on:click="redirect(empresa.id)">Asignar asesores</a>
+                              <a class="btn btn-success notika-btn-success" v-on:click="redirect(empresa.id, empresa.nombre)">Asignar asesores</a>
                             </div>
                           <hr>
                         </div>
@@ -304,8 +304,9 @@
           }
         },
         methods: {
-          redirect: function (id) {
+          redirect: function (id, nombre) {
             localStorage.setItem('id_empresa', id);
+            localStorage.setItem('nombre_empresa', nombre);
             window.location.href = "empresa_asesores.html"
           },
           logout: function () {
