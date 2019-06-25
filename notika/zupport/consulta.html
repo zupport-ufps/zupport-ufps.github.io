@@ -193,6 +193,8 @@
                       </div>
                       <div v-for="comentario in comentarios">
                         <h4 style="color: #032a1e;"> {{ comentario.autor.nombre }} {{ comentario.autor.apellido }} </h4>
+                        <p v-if="comentario.autor.rol == '0'">(Autor)</p>
+                        <p v-if="comentario.autor.rol == '1'">(Asesor)</p>
                         <p>{{ comentario.info }}</p>
                         <p style="text-align:right">{{ comentario.timestamp | moment}}</p>
                         <hr>
