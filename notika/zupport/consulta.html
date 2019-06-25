@@ -295,29 +295,6 @@
           }
         },
         mounted () {
-          /**
-          axios
-          .get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/', {
-            headers: {
-              'Authorization': "Token "+localStorage.getItem('token')
-            }
-          }).then(
-            response => (
-              this.info = response.data
-            )
-          ),
-          axios
-          .get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/comentarios/', {
-            headers: {
-              'Authorization': "Token "+localStorage.getItem('token')
-            }
-          }).then(
-            response => (
-              this.comentarios = response.data
-            )
-          )
-*/
-
           axios.all([
             axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/', {
               headers: {
@@ -332,11 +309,10 @@
           ]).then(
             axios.spread(
               (response1, response2) => {
-            console.log(response1.data);
-            console.log(response2.data);
-            this.info = response1.data
-            this.comentarios = response2.data
-            })
+                this.info = response1.data
+                this.comentarios = response2.data
+              }
+            )
           ).catch(error => {
             console.log(error);
           });
