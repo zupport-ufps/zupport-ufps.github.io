@@ -199,6 +199,20 @@
                         <p style="text-align:right">{{ comentario.timestamp | moment}}</p>
                         <hr>
                       </div>
+                      <div class="invoice-hds-pro">
+                        <div class="form-group">
+                          <h3>Agregar comentario</h3>
+                          <br>
+                          <div class="nk-int-st">
+                            <input class="form-control" type="text" placeholder="Escriba aqu&iacute; su comentario" v-model="comentario"></input>
+                          </div>
+                          <br>
+                          <br>
+                          <div style="text-align:right;">
+                            <a class="btn btn-success notika-btn-success" v-on:click="new_comment()">Comentar</a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -302,18 +316,18 @@
         data () {
           return {
             info: null,
-            comentarios: null
-
+            comentarios: null,
+            comentario: null
           }
         },
         mounted () {
           axios.all([
-            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/', {
+            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+localStorage.getItem('id_consulta')+'/', {
               headers: {
                 'Authorization': "Token "+localStorage.getItem('token')
               }
             }),
-            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+ localStorage.getItem('id_consulta')+'/comentarios/', {
+            axios.get('https://zupport.herokuapp.com/ayuda/solicitud/'+localStorage.getItem('id_consulta')+'/comentarios/', {
               headers: {
                 'Authorization': "Token "+localStorage.getItem('token')
               }
@@ -332,7 +346,30 @@
         },
         methods: {
           new_comment: function () {
-
+            axios.post(
+              'https://zupport.herokuapp.com/ayuda/comentario/',
+              {
+                comentario: this.comentario,
+                solicitud_id: localStorage.getItem('id_consulta')
+              },
+              {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              }
+            ).then(
+              response => {
+                if (response.status == 201) {
+                  location.reload()
+                }
+              }
+            ).catch(
+              error => {
+                if (error.response.status == 401) {
+                  console.log("No permitido");
+                }
+              }
+            );
           }
         },
         filters: {
