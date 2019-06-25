@@ -181,9 +181,17 @@
             ).then(
               response => {
                 if (response.status == 200) {
-                  localStorage.setItem('rol', response.data.rol);
+                  localStorage.setItem('rol', response.data.permisos);
                   localStorage.setItem('token', response.data.token);
-                  window.location.href = "profile.html"
+
+                  var rol = localStorage.getItem("rol")
+                  if (rol == '0') {
+                    window.location.href = "profile.html"
+                  }else if (rol == '1') {
+                    window.location.href = "asesor/perfil.html"
+                  }else if (rol == '2') {
+                    window.location.href = "admin/perfil.html"
+                  }
                 }
               }
             ).catch(
