@@ -327,6 +327,33 @@
           },
           asignar: function() {
             console.log("Aquí empieza la asignación");
+                axios.post(
+                    'https://zupport.herokuapp.com/empresa/asesor/', {
+                        asesor_id: this.asesor,
+                        empresa_id: localStorage.getItem('id_empresa')
+                    },
+                    {
+                        headers: {
+                            'Authorization': "Token "+localStorage.getItem('token')
+                        }
+                    }
+                ).then(
+                    response => {
+                        if (response.status == 201) {
+                          console.log("Registrado");
+                        }
+                    }
+                ).catch(
+                    error => {
+                        if (error.response.status == 401) {
+                            console.log("Credenciales incorrectas");
+                        }else if (error.response.status == 404) {
+                            console.log("No se pudo registrar la solicitud");
+                        }else if (error.response.status == 409) {
+                          console.log("Ya está asignado");
+                        }
+                    }
+                );
           }
         }
       })
