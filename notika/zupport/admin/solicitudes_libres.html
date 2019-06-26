@@ -164,84 +164,37 @@
 
       <!-- Breadcomb area Start-->
       <div class="breadcomb-area">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="breadcomb-list">
-                <div class="row">
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="breadcomb-wp">
-                      <div class="breadcomb-icon">
-                        <i class="notika-icon notika-support"></i>
-                      </div>
-                      <div class="breadcomb-ctn">
-                        <h2>Registrar miembro del Staff</h2>
-                        <p>Registre un nuevo miembro del Staff de Zupport</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Breadcomb area End-->
-
-      <div class="breadcomb-area">
           <div class="container">
               <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <div class="form-element-list mg-t-30">
-                          <div class="row">
-                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="invoice-hds-pro">
-                                  <div class="form-group">
-                                    <div class="input-group mg-t-15">
-                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
-                                        <div class="nk-int-st">
-                                            <input type="text" class="form-control" placeholder="Nombre" v-model="nombre">
-                                        </div>
-                                    </div>
-                                    <div class="input-group mg-t-15">
-                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
-                                        <div class="nk-int-st">
-                                            <input type="text" class="form-control" placeholder="Apellido" v-model="apellido">
-                                        </div>
-                                    </div>
-                                    <div class="input-group mg-t-15">
-                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
-                                        <div class="nk-int-st">
-                                            <input type="text" class="form-control" placeholder="Email" v-model="email">
-                                        </div>
-                                    </div>
-                                    <div class="input-group mg-t-15">
-                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
-                                        <div class="nk-int-st">
-                                            <input type="password" class="form-control" placeholder="Contraseña" v-model="password">
-                                        </div>
-                                    </div>
-                                    <div class="input-group mg-t-15">
-                                        <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
-                                        <div class="nk-int-st">
-                                          <div class="bootstrap-select fm-cmp-mg">
-                                              <select class="selectpicker" v-model="rol">
-                                                <option>Seleccione uno</option>
-                                                <option v-for="option in roles" v-bind:value="option.value">
-                                                  {{ option.text }}
-                                                </option>
-                                              </select>
-                                          </div>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div style="text-align:right;">
-                                      <a class="btn btn-success notika-btn-success" v-on:click="registro()">Registrar</a>
-                                    </div>
-                                  </div>
-                                </div>
+                      <div class="row">
+                          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                              <div class="breadcomb-ctn">
+                                  <h1>Tus solicitudes de ayuda</h1>
                               </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Breadcomb area End-->
+
+      <!-- Area Start-->
+      <div class="invoice-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="invoice-wrap">
+                        <hr>
+                          <div class="invoice-hds-pro" v-for="consulta in info">
+                              <h3 style="color: #03A9F4;"><a v-on:click="redirect(consulta.id)">{{ consulta.asunto }}</a></h3>
+                              <br>
+                              <p v-if="consulta.asesor == null">Aún no se ha asignado un asesor</p>
+                              <p v-else>Está asignado al asesor: {{ consulta.asesor.nombre }} {{ consulta.asesor.apellido }}</p>
+                              <p>Registrada a la empresa: {{ consulta.empresa.nombre }}</p>
+                              <p>{{ consulta.timestamp | moment}}</p>
+                            <hr>
                           </div>
                       </div>
                   </div>
@@ -343,57 +296,48 @@
   <!-- falta este pedazome voy a dormir tengo previo a las 6-->
     <!-- falta este pedazome voy a dormir tengo previo a las 6-->
       <!-- falta este pedazome voy a dormir tengo previo a las 6-->
-    <script type="text/javascript">
-      new Vue({
-        el: '#app',
-        data () {
-          return {
-            nombre: null,
-            apellido: null,
-            email: null,
-            password: null,
-            rol: null,
-            roles: [
-              { text: 'Asesor', value: 1 },
-              { text: 'Administrador', value: 2 }
-            ]
-          }
-        },
-        methods: {
-          logout: function () {
-            localStorage.clear();
+      <script type="text/javascript">
+        new Vue({
+          el: '#app',
+          data () {
+            return {
+              info: null
+            }
           },
-          registro: function () {
-            axios.post(
-              'https://zupport.herokuapp.com/registro/admin/',
-              {
-                nombre: this.nombre,
-                apellido: this.apellido,
-                email: this.email,
-                password: this.password,
-                rol: this.rol
-              },
-              {
-                headers: {
-                  'Authorization': "Token "+localStorage.getItem('token')
-                }
+          mounted () {
+            axios
+            .get('https://zupport.herokuapp.com/ayuda/solicitudes/libres/', {
+              headers: {
+                'Authorization': "Token "+localStorage.getItem('token')
               }
-            ).then(
-              response => {
-                if (response.status == 201) {
-                  location.reload()
-                }
-              }
+            }).then(
+              response => (
+                this.info = response.data
+              )
             ).catch(
               error => {
                 if (error.response.status == 401) {
-                  console.log("Credenciales incorrectas");
+                  window.location.href = "../login.html";
                 }
               }
             );
           },
-        }
-      })
-    </script>
+          methods: {
+            redirect: function (id) {
+              localStorage.setItem('id_solicitud', id);
+              window.location.href = "asignar_solicitud.html"
+            },
+            logout: function() {
+              localStorage.clear();
+            }
+          },
+          filters: {
+            moment: function (date) {
+              moment.locale('es')
+              return moment(date).format('[Creada el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
+            }
+          }
+        })
+      </script>
 </body>
 </html>
