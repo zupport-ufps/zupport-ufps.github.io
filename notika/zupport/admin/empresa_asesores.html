@@ -173,15 +173,10 @@
                         </div>
                         <br>
                         <h3>Asigne un asesor a la empresa</h3>
-                        <div class="bootstrap-select fm-cmp-mg">
-                            <select class="selectpicker">
-              <option>Drama</option>
-              <option>Cariska</option>
-              <option>Cheriska</option>
-              <option>Malias</option>
-              <option>Kamines</option>
-              <option>Austranas</option>
-            </select>
+                        <div class="form-group">
+                          <select class="form-control" v-model="asesor">
+                            <option v-for="as in asesores" v-bind:value="as.id">{{ as.nombre }} {{ as.apellido }}</option>
+                          </select>
                         </div>
                         <div style="text-align:right;">
                           <a class="btn btn-success notika-btn-success" v-on:click="registro()">Asignar</a>
@@ -294,38 +289,39 @@
         data () {
           return {
             info: null,
+            asesor: null,
+            asesores: null,
             nombre_empresa: localStorage.getItem('nombre_empresa')
           }
         },
-        created () {
-          axios
-          .get('https://zupport.herokuapp.com/empresa/'+localStorage.getItem('id_empresa')+'/asesores/', {
-            headers: {
-              'Authorization': "Token "+localStorage.getItem('token')
-            }
-          }).then(
-            response => (
-              this.info = response
-            )
-          ).catch(
-            error => {
-              if (error.response.status == 401) {
-                window.location.href = "../login.html";
+        mounted () {
+            axios.all([
+              axios.get('https://zupport.herokuapp.com/empresa/'+localStorage.getItem('id_empresa')+'/asesores/', {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              }),
+              axios.get('https://zupport.herokuapp.com/asesores/', {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              })
+            ]).then(
+              axios.spread(
+                (response1, response2) => {
+                  this.info = response1
+                  this.asesores = response2.data
+                }
+              )
+            ).catch(
+              error => {
+                if (error.response.status == 401) {
+                  window.location.href = "../login.html";
+                }
               }
-            }
-          );
-        },
-        filters: {
-          moment: function (date) {
-            moment.locale('es')
-            return moment(date).format('[Registrada el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
-          }
+            );
         },
         methods: {
-          redirect: function (id) {
-            localStorage.setItem('id_empresa', id);
-            window.location.href = "empresa_asesores.html"
-          },
           logout: function () {
             localStorage.clear();
           }
