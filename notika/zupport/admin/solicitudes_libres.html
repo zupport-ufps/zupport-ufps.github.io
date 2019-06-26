@@ -188,7 +188,7 @@
                       <div class="invoice-wrap">
                         <hr>
                           <div class="invoice-hds-pro" v-for="consulta in info">
-                              <h3 style="color: #03A9F4;"><a v-on:click="redirect(consulta.id)">{{ consulta.asunto }}</a></h3>
+                              <h3 style="color: #03A9F4;"><a v-on:click="redirect(consulta.id, consulta.empresa.id)">{{ consulta.asunto }}</a></h3>
                               <br>
                               <p v-if="consulta.asesor == null">Aún no se ha asignado un asesor</p>
                               <p v-else>Está asignado al asesor: {{ consulta.asesor.nombre }} {{ consulta.asesor.apellido }}</p>
@@ -323,8 +323,9 @@
             );
           },
           methods: {
-            redirect: function (id) {
+            redirect: function (id, id_empresa) {
               localStorage.setItem('id_solicitud', id);
+              localStorage.setItem('id_empresa', id_empresa);
               window.location.href = "asignar_solicitud.html"
             },
             logout: function() {
