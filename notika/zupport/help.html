@@ -196,7 +196,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
                                         <div style="text-align:right;">
-                                          <button class="btn btn-success notika-btn-success" v-on:click="solicitud()">Enviar</button>
+                                          <button class="btn btn-success notika-btn-success" v-on:click="crear_solicitud()">Cear solicitud</button>
                                         </div>
                                     </div>
                                 </div>
@@ -323,19 +323,18 @@
                     ).catch(
                         error => {
                             if (error.response.status == 401) {
-                                //window.location.href = "login.html";
                                 console.log("Hay un problema de autorización")
                             }
                         }
                     );
             },
             methods: {
-                solicitud: function () {
+                crear_solicitud: function () {
                     axios.post(
                         'https://zupport.herokuapp.com/ayuda/solicitud/', {
                             asunto: this.asunto,
-                            descripcion: this.ayudarte,
-                            empresa: this.empresa
+                            descripcion: this.descripcion,
+                            empresa_id: this.empresa
                         },
                         {
                             headers: {
@@ -345,7 +344,7 @@
                     ).then(
                         response => {
                             if (response.status == 201) {
-
+                              window.location.href = "consultas.html";
                             }
                         }
                     ).catch(
