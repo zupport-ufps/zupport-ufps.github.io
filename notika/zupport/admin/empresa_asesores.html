@@ -326,7 +326,6 @@
             localStorage.clear();
           },
           asignar: function() {
-            console.log("Aquí empieza la asignación");
                 axios.post(
                     'https://zupport.herokuapp.com/empresa/asesor/', {
                         asesor_id: this.asesor,
@@ -340,7 +339,7 @@
                 ).then(
                     response => {
                         if (response.status == 201) {
-                          console.log("Registrado");
+                          location.reload()
                         }
                     }
                 ).catch(
