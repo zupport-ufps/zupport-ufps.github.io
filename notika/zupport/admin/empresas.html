@@ -89,13 +89,13 @@
                                           </li>
                                           <li><a href="empresas.html">Todas las empersas</a>
                                           </li>
-                                          <li><a href="asesores_empresa.html">Asesores de empresas</a>
-                                          </li>
                                       </ul>
                                   </li>
                                   <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Staff</a>
                                       <ul id="Pagemob" class="collapse dropdown-header-top">
                                           <li><a href="nuevo_usuario.html">Registrar usuario</a>
+                                          </li>
+                                          <li><a href="solicitudes_libres.html">Asignar solicitudes</a>
                                           </li>
                                       </ul>
                                   </li>
@@ -133,13 +133,13 @@
                                 </li>
                                 <li><a href="empresas.html">Todas las empersas</a>
                                 </li>
-                                <li><a href="asesores_empresa.html">Asesores de empresas</a>
-                                </li>
                               </ul>
                           </div>
                           <div id="asesores" class="tab-pane notika-tab-menu-bg animated flipInX">
                               <ul class="notika-main-menu-dropdown">
                                 <li><a href="nuevo_usuario.html">Registrar Staff</a>
+                                </li>
+                                <li><a href="solicitudes_libres.html">Asignar solicitudes</a>
                                 </li>
                               </ul>
                           </div>
@@ -173,8 +173,7 @@
                             <h3 style="color: #03A9F4;">{{ empresa.nombre }}</h3>
                             <br>
                             <p>{{ empresa.timestamp | moment}}</p>
-                            <div style="text-align:right;">
-                              <a class="btn btn-danger notika-btn-danger" v-on:click="redirect_help(empresa.id)">Asignar consultas</a> <a class="btn btn-success notika-btn-success" v-on:click="redirect(empresa.id, empresa.nombre)">Asignar asesores</a>
+                            <div style="text-align:right;"><a class="btn btn-warning notika-btn-warning" v-on:click="redirect(empresa.id, empresa.nombre)">Asignar asesores</a>
                             </div>
                           <hr>
                         </div>

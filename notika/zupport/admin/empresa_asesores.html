@@ -93,13 +93,13 @@
                                           </li>
                                           <li><a href="empresas.html">Todas las empersas</a>
                                           </li>
-                                          <li><a href="asesores_empresa.html">Asesores de empresas</a>
-                                          </li>
                                       </ul>
                                   </li>
                                   <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Staff</a>
                                       <ul id="Pagemob" class="collapse dropdown-header-top">
                                           <li><a href="nuevo_usuario.html">Registrar usuario</a>
+                                          </li>
+                                          <li><a href="solicitudes_libres.html">Asignar solicitudes</a>
                                           </li>
                                       </ul>
                                   </li>
@@ -137,13 +137,13 @@
                                 </li>
                                 <li><a href="empresas.html">Todas las empersas</a>
                                 </li>
-                                <li><a href="asesores_empresa.html">Asesores de empresas</a>
-                                </li>
                               </ul>
                           </div>
                           <div id="asesores" class="tab-pane notika-tab-menu-bg animated flipInX">
                               <ul class="notika-main-menu-dropdown">
                                 <li><a href="nuevo_usuario.html">Registrar Staff</a>
+                                </li>
+                                <li><a href="solicitudes_libres.html">Asignar solicitudes</a>
                                 </li>
                               </ul>
                           </div>
@@ -173,18 +173,13 @@
                         </div>
                         <br>
                         <h3>Asigne un asesor a la empresa</h3>
-                        <div class="bootstrap-select fm-cmp-mg">
-                            <select class="selectpicker">
-              <option>Drama</option>
-              <option>Cariska</option>
-              <option>Cheriska</option>
-              <option>Malias</option>
-              <option>Kamines</option>
-              <option>Austranas</option>
-            </select>
+                        <div class="form-group">
+                          <select class="form-control" v-model="asesor">
+                            <option v-for="as in asesores" v-bind:value="as.id">{{ as.nombre }} {{ as.apellido }}</option>
+                          </select>
                         </div>
                         <div style="text-align:right;">
-                          <a class="btn btn-success notika-btn-success" v-on:click="registro()">Asignar</a>
+                          <a class="btn btn-success notika-btn-success" v-on:click="asignar()">Asignar</a>
                         </div>
                         <hr>
                         <h3>Asesores asignados a la empresa</h3>
@@ -294,40 +289,70 @@
         data () {
           return {
             info: null,
+            asesor: null,
+            asesores: null,
             nombre_empresa: localStorage.getItem('nombre_empresa')
           }
         },
-        created () {
-          axios
-          .get('https://zupport.herokuapp.com/empresa/'+localStorage.getItem('id_empresa')+'/asesores/', {
-            headers: {
-              'Authorization': "Token "+localStorage.getItem('token')
-            }
-          }).then(
-            response => (
-              this.info = response
-            )
-          ).catch(
-            error => {
-              if (error.response.status == 401) {
-                window.location.href = "../login.html";
+        mounted () {
+            axios.all([
+              axios.get('https://zupport.herokuapp.com/empresa/'+localStorage.getItem('id_empresa')+'/asesores/', {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              }),
+              axios.get('https://zupport.herokuapp.com/asesores/', {
+                headers: {
+                  'Authorization': "Token "+localStorage.getItem('token')
+                }
+              })
+            ]).then(
+              axios.spread(
+                (response1, response2) => {
+                  this.info = response1
+                  this.asesores = response2.data
+                }
+              )
+            ).catch(
+              error => {
+                if (error.response.status == 401) {
+                  window.location.href = "../login.html";
+                }
               }
-            }
-          );
-        },
-        filters: {
-          moment: function (date) {
-            moment.locale('es')
-            return moment(date).format('[Registrada el] dddd D [de] MMMM [del] YYYY [a las] h:mm a');
-          }
+            );
         },
         methods: {
-          redirect: function (id) {
-            localStorage.setItem('id_empresa', id);
-            window.location.href = "empresa_asesores.html"
-          },
           logout: function () {
             localStorage.clear();
+          },
+          asignar: function() {
+                axios.post(
+                    'https://zupport.herokuapp.com/empresa/asesor/', {
+                        asesor_id: this.asesor,
+                        empresa_id: localStorage.getItem('id_empresa')
+                    },
+                    {
+                        headers: {
+                            'Authorization': "Token "+localStorage.getItem('token')
+                        }
+                    }
+                ).then(
+                    response => {
+                        if (response.status == 201) {
+                          location.reload()
+                        }
+                    }
+                ).catch(
+                    error => {
+                        if (error.response.status == 401) {
+                            console.log("Credenciales incorrectas");
+                        }else if (error.response.status == 404) {
+                            console.log("No se pudo registrar la solicitud");
+                        }else if (error.response.status == 409) {
+                          console.log("Ya está asignado");
+                        }
+                    }
+                );
           }
         }
       })
