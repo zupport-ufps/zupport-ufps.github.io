@@ -389,8 +389,30 @@
               localStorage.clear();
             },
             asignar: function() {
-              console.log("La empresa a la que está asignado es");
-              console.log(localStorage.getItem('id_empresa'));
+              axios.post(
+                'https://zupport.herokuapp.com/ayuda/solicitud/asesor/',
+                {
+                  asesor_id: this.asesor,
+                  consulta_id: localStorage.getItem('id_solicitud')
+                },
+                {
+                  headers: {
+                    'Authorization': "Token "+localStorage.getItem('token')
+                  }
+                }
+              ).then(
+                response => {
+                  if (response.status == 201) {
+                    window.location.href = "solicitudes_libres.html";
+                  }
+                }
+              ).catch(
+                error => {
+                  if (error.response.status == 401) {
+                    console.log("Credenciales incorrectas");
+                  }
+                }
+              );
             }
           }
         })
